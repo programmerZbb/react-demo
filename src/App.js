@@ -19,10 +19,14 @@ class App extends Component {
     })
   }
   inputChange(e) {
-    let value = e.target.value
+    // let value = e.target.value
+    let value = this.input.value
     this.setState(() => ({
       value
-    }))
+    }), () => {
+      console.log(this.state.value, 2)
+    })
+    console.log(this.state.value, 1)
   }
   removeItem(index) {
     let list = [...this.state.list]
@@ -47,6 +51,9 @@ class App extends Component {
         <input type="text" 
           value={this.state.value} 
           onChange={this.inputChange.bind(this)}
+          ref={(input) => {
+            this.input = input
+          }}
         /> 
           <button onClick={this.submit.bind(this)}>提交</button>
         <ul>
