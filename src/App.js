@@ -1,14 +1,18 @@
 import React, { Component, Fragment } from "react"
 import Item from "./item"
 import Axios from "axios"
+import './App.css'
+import store from "./redux/store"
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.removeItem = this.removeItem.bind(this)
+    this.handleAnima = this.handleAnima.bind(this)
     this.state = {
       value: "",
-      list: []
+      list: [],
+      animate: false
     }
   }
   componentWillMount() {
@@ -75,8 +79,27 @@ class App extends Component {
     console.log('componentWillUpdate')
   }
 
+  // eslint-disable-next-line no-dupe-class-members
+  componentWillUpdate() {
+    console.log('componentWillUpdate')
+  }
+  
+  componentDidUpdate() {
+    console.log('componentDidupdate')
+  }
+  componentWillUnmount() {
+    console.log('componentWillUnmount')
+  }
+
+  handleAnima() {
+    console.log('执行了')
+    this.setState(() => ({
+      animate: !this.state.animate
+    }))
+  }
+
   render() {
-    console.log('app render执行')
+    console.log("father render")
     return (
       <Fragment>
         <input type="text" 
@@ -92,6 +115,8 @@ class App extends Component {
             this.itemArr()
           }
         </ul>
+        <button onClick={this.handleAnima}>点击动画</button>
+        <div className={'amia'}>11111</div>
       </Fragment>
     )
   }
