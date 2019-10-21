@@ -9,42 +9,59 @@ class App extends Component {
     super(props)
     this.removeItem = this.removeItem.bind(this)
     this.handleAnima = this.handleAnima.bind(this)
-    this.state = {
-      value: "",
-      list: [],
-      animate: false
-    }
+    this.handleStoreChange = this.handleStoreChange.bind(this)
+    this.state = store.getState()
+    store.subscribe(this.handleStoreChange)
   }
   componentWillMount() {
     console.log('componentWillMount')
   }
   submit() {
-    let [...list] = this.state.list
-    list.push(this.state.value)
-    this.setState({
-      list,
-      value: ""
-    })
+    // let [...list] = this.state.list
+    // list.push(this.state.value)
+    // this.setState({
+    //   list,
+    //   value: ""
+    // })
+
+    const action = {
+      type: "add_item",
+    }
+    store.dispatch(action)
   }
   inputChange(e) {
     // let value = e.target.value
     let value = this.input.value
-    this.setState(() => ({
+    // this.setState(() => ({
+    //   value
+    // }), () => {
+    //   console.log(this.state.value, 2)
+    // })
+    // console.log(this.state.value, 1)
+
+    const action = {
+      type: "input_change",
       value
-    }), () => {
-      console.log(this.state.value, 2)
-    })
-    console.log(this.state.value, 1)
+    }
+    store.dispatch(action)
+  }
+  handleStoreChange() {
+    this.setState(() => (store.getState()))
   }
   removeItem(index) {
-    let list = [...this.state.list]
-    list.splice(index, 1)
-    this.setState((prevState) => {
-      console.log(prevState === this.state)
-      return {
-        list
-      }
-    })
+    // let list = [...this.state.list]
+    // list.splice(index, 1)
+    // this.setState((prevState) => {
+    //   console.log(prevState === this.state)
+    //   return {
+    //     list
+    //   }
+    // })
+    const action = {
+      type: "delete_item",
+      index
+    }
+    store.dispatch(action)
   }
   itemArr() {
     return this.state.list.map((item, index) => {
@@ -93,9 +110,9 @@ class App extends Component {
 
   handleAnima() {
     console.log('执行了')
-    this.setState(() => ({
-      animate: !this.state.animate
-    }))
+    // this.setState(() => ({
+    //   animate: !this.state.animate
+    // }))
   }
 
   render() {
@@ -103,7 +120,7 @@ class App extends Component {
     return (
       <Fragment>
         <input type="text" 
-          value={this.state.value} 
+          value={this.state.inputValue} 
           onChange={this.inputChange.bind(this)}
           ref={(input) => {
             this.input = input
