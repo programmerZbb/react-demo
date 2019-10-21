@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react"
 import Item from "./item"
+import Axios from "axios"
 
 class App extends Component {
   constructor(props) {
@@ -9,6 +10,9 @@ class App extends Component {
       value: "",
       list: []
     }
+  }
+  componentWillMount() {
+    console.log('componentWillMount')
   }
   submit() {
     let [...list] = this.state.list
@@ -45,7 +49,34 @@ class App extends Component {
       )
     })
   }
+
+  componentDidMount() {
+    console.log('componentDidMount')
+    Axios.get("/api/test")
+    .then(res => {
+      console.log(res)
+      this.setState(() => (
+        {
+          list: [...res.data]
+        }
+      ))
+    })
+    .catch(err => {
+      console.log(err, "在这")
+    })
+  }
+  
+  shouldComponentUpdate() {
+    console.log('shouldComponentUpdate')
+    return true
+  }
+  
+  componentWillUpdate() {
+    console.log('componentWillUpdate')
+  }
+
   render() {
+    console.log('app render执行')
     return (
       <Fragment>
         <input type="text" 
