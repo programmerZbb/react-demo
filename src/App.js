@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import Item from "./item"
 import Axios from "axios"
 import './App.css'
 import store from "./redux/store"
+import UiCom from "./ui_component"
 
 class App extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class App extends Component {
     this.handleStoreChange = this.handleStoreChange.bind(this)
     this.state = store.getState()
     store.subscribe(this.handleStoreChange)
+    this.itemArr = this.itemArr.bind(this)
   }
   componentWillMount() {
     console.log('componentWillMount')
@@ -30,8 +32,8 @@ class App extends Component {
     store.dispatch(action)
   }
   inputChange(e) {
-    // let value = e.target.value
-    let value = this.input.value
+    let value = e.target.value
+    // let value = this.input.value
     // this.setState(() => ({
     //   value
     // }), () => {
@@ -118,23 +120,7 @@ class App extends Component {
   render() {
     console.log("father render")
     return (
-      <Fragment>
-        <input type="text" 
-          value={this.state.inputValue} 
-          onChange={this.inputChange.bind(this)}
-          ref={(input) => {
-            this.input = input
-          }}
-        /> 
-          <button onClick={this.submit.bind(this)}>提交</button>
-        <ul>
-          {
-            this.itemArr()
-          }
-        </ul>
-        <button onClick={this.handleAnima}>点击动画</button>
-        <div className={'amia'}>11111</div>
-      </Fragment>
+      <UiCom value={this.state.inputValue} handleChange={this.inputChange.bind(this)} handleClick={this.submit.bind(this)} itemArr={this.itemArr}></UiCom>
     )
   }
 }
