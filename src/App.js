@@ -118,7 +118,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("father render")
+    console.log("father render", this.state.inputValue)
     return (
       <UiCom value={this.state.inputValue} handleChange={this.inputChange.bind(this)} handleClick={this.submit.bind(this)} itemArr={this.itemArr}></UiCom>
     )
