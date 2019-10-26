@@ -17,6 +17,10 @@ const reducer = (state = defaultState, action) => {
         newState.inputValue = action.value
         return newState
     }
+
+    if(action === 'input_store') {
+        
+    }
     return state
 }
 
