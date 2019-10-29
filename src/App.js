@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import UiCom from "./ui_component"
 import Item from "./item"
 import store from './redux/store'
-import { getDeleteAction, getAddAction, getInputChangeAction } from './redux/actionCreators'
+import { getDeleteAction, getAddAction, getInputChangeAction, getTodoList } from './redux/actionCreators'
 
 class App extends Component {
   constructor(props) {
@@ -21,15 +21,7 @@ class App extends Component {
     this.setState(() => (store.getState()))
   }
   removeItem(index) {
-    // let list = [...this.state.list]
-    // list.splice(index, 1)
-    // this.setState((prevState) => {
-    //   console.log(prevState === this.state)
-    //   return {
-    //     list
-    //   }
-    // })
-    const action = getDeleteAction()
+    const action = getDeleteAction(index)
     store.dispatch(action)
   }
   submit() {
@@ -42,6 +34,12 @@ class App extends Component {
     const action = getInputChangeAction(value)
     store.dispatch(action)
   }
+
+  componentDidMount() {
+    const action = getTodoList()
+    store.dispatch(action)
+  }
+
   render() {
     console.log(this.state.inputValue)
     return (

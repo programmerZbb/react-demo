@@ -1,4 +1,5 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
 const defaultState = {
     list: [],
@@ -6,24 +7,43 @@ const defaultState = {
 }
 
 const reducer = (state = defaultState, action) => {
-    if(action === 'add_item') {
+    if(action.type === 'add_item') {
         const newState = JSON.parse(JSON.stringify(state))
         newState.list.push(newState.inputValue)
+        newState.inputValue = ""
         return newState
     }
 
-    if(action === 'input_change') {
+    if(action.type === 'input_change') {
         const newState = JSON.parse(JSON.stringify(state))
         newState.inputValue = action.value
         return newState
     }
 
-    if(action === 'input_store') {
-        
+    if(action.type === 'init_store') {
+        const newState = JSON.parse(JSON.stringify(state))
+        newState.list = action.list
+        return newState
     }
+
+    if(action.type === 'delete_item') {
+        const newState = JSON.parse(JSON.stringify(state))
+        newState.list.splice(action.index, 1)
+        return newState
+    }
+
     return state
 }
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+// const composeEnhancers =
+//   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : compose;
+
+// const enhancer = composeEnhancers(
+//     applyMiddleware(...[thunk]),
+//     // other store enhancers if any
+// );
+
+const store = createStore(reducer, applyMiddleware(thunk))
 
 export default store
