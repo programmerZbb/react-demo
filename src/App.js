@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import UiCom from "./ui_component"
 import Item from "./item"
-import store from './redux/store'
+// import store from './redux/store'
 import { getDeleteAction, getAddAction, getInputChangeAction, getTodoList } from './redux/actionCreators'
+import { connect } from 'react-redux'
 
 class App extends Component {
   constructor(props) {
@@ -48,4 +49,16 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return {
+    list: state.list,
+    inputValue: state.inputValue
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
