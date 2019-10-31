@@ -22,7 +22,7 @@ class Item extends Component {
     render() {
         console.log("item执行了")
         return (
-            <div onClick={() => {this.handleDelete()}}>{this.props.itemData}</div>
+            <div onClick={() => {this.handleDelete()}} style={{ color: "red" }}>{this.props.itemData}</div>
         )
     }
 
