@@ -22,10 +22,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToprops = (state) => {
   return {
-    list: state.list,
-    inputValue: state.inputValue
+    inputValue: state.inputValue,
+    list: state.list
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -58,4 +58,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToprops, mapDispatchToProps)(App)
