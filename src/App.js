@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import UiCom from "./ui_component"
 import Item from "./item"
+import KeyIssue from './components/someissue'
 // import store from './redux/store'
 import { getDeleteAction, getAddAction, getInputChangeAction, getTodoList } from './redux/actionCreators'
 import { connect } from 'react-redux'
@@ -9,7 +10,12 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      list: [
+        '111',
+        '222'
+      ]
+    }
   }
 
   componentDidMount() {
@@ -17,6 +23,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('render')
     return (
       <Router>
         <Fragment>
@@ -27,6 +34,9 @@ class App extends Component {
           </ul>
           <Route path='/home' exact render={() => (<div>我是首页</div>)}></Route>
           <Route path='/detail' exact render={() => (<div>我是详情</div>)}></Route>
+          <br />
+          <KeyIssue list={this.state.list} />
+          <input ref={(input) => {this.testInput = input}}></input>
         </Fragment>
       </Router>
     )
