@@ -14,12 +14,42 @@ class App extends Component {
       list: [
         '111',
         '222'
+      ],
+      valueList: [
+        '',
+        ''
       ]
     }
+    this.itemInputChange = this.itemInputChange.bind(this)
+    this.addItemInput = this.addItemInput.bind(this)
   }
 
   componentDidMount() {
     this.props.initList()
+  }
+
+
+  // input item 变化
+  itemInputChange (index, value) {
+    let valueList = [...this.state.valueList]
+    valueList[index] = value
+    this.setState(() => (
+      {
+        valueList
+      }
+    ))
+  }
+  addItemInput () {
+    let list = [...this.state.list]
+    let valueList = [...this.state.valueList]
+    list.unshift('新增的小明')
+    valueList.unshift('')
+    this.setState(() => (
+      {
+        list,
+        valueList
+      }
+    ))
   }
 
   render() {
@@ -35,8 +65,8 @@ class App extends Component {
           <Route path='/home' exact render={() => (<div>我是首页</div>)}></Route>
           <Route path='/detail' exact render={() => (<div>我是详情</div>)}></Route>
           <br />
-          <KeyIssue list={this.state.list} />
-          <input ref={(input) => {this.testInput = input}}></input>
+          <button onClick={this.addItemInput}>添加</button>
+          <KeyIssue list={this.state.list} valueList={this.state.valueList} itemInputChange={this.itemInputChange} />
         </Fragment>
       </Router>
     )

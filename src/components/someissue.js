@@ -15,10 +15,10 @@ class Issue extends Component {
                     this.props.list.map((item, index) => {
                         return (
                             <div key={index}>
-                                <div>{ item }</div>
-                                <input ref={ input => {
+                                <span>{ item }</span>
+                                <input value={this.props.valueList[index]} ref={ input => {
                                     this.testInput = input
-                                } } onChange={this.handleInputIssue}></input>
+                                } } onChange={ (e) => { this.handleInputIssue(e, index) }}></input>
                             </div>
                         )
                     })
@@ -26,9 +26,10 @@ class Issue extends Component {
             </div>
         )
     }
-    handleInputIssue (e) {
+    handleInputIssue (e, index) {
         // console.log(this)
-        console.log(this.testInput.value, e.target.value)
+        // console.log(this.testInput.value, e.target.value)
+        this.props.itemInputChange(index, e.target.value)
     }
 }
 
