@@ -3,6 +3,7 @@ import Item from "./item"
 import Axios from "axios"
 import './App.css'
 import store from "./redux/store"
+import Home from "./component/Home"
 
 class App extends Component {
   constructor(props) {
@@ -134,6 +135,10 @@ class App extends Component {
         </ul>
         <button onClick={this.handleAnima}>点击动画</button>
         <div className={'amia'}>11111</div>
+        <br/>
+        <Home {...{name: 'zbb', age: 11}}>
+          <div><span>dawdwadwadwad</span></div>
+        </Home>
       </Fragment>
     )
   }
