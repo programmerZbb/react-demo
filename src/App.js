@@ -29,8 +29,9 @@ class App extends Component {
     }
     store.dispatch(action)
   }
-  inputChange(e) {
+  inputChange(name, e) {
     // let value = e.target.value
+    console.log(name, '-----name')
     let value = this.input.value
     // this.setState(() => ({
     //   value
@@ -121,7 +122,7 @@ class App extends Component {
       <Fragment>
         <input type="text" 
           value={this.state.inputValue} 
-          onChange={this.inputChange.bind(this)}
+          onChange={this.inputChange.bind(this, '1')}
           ref={(input) => {
             this.input = input
           }}
