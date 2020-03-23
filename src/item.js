@@ -18,6 +18,12 @@ class Item extends Component {
     componentWillUnmount() {
         console.log('componentWillUnmount')
     }
+    componentDidMount() {
+        console.log('child-did')
+    }
+    componentWillMount() {
+        console.log('child-will')
+    }
 
     render() {
         console.log("item执行了")

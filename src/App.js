@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react"
 import Item from "./item"
+import Test from './component/test'
 import Axios from "axios"
 import './App.css'
 import store from "./redux/store"
@@ -10,8 +11,9 @@ class App extends Component {
     this.removeItem = this.removeItem.bind(this)
     this.handleAnima = this.handleAnima.bind(this)
     this.handleStoreChange = this.handleStoreChange.bind(this)
-    this.state = store.getState()
-    store.subscribe(this.handleStoreChange)
+    this.state = {
+      test: '11111'
+    }
   }
   componentWillMount() {
     console.log('componentWillMount')
@@ -111,15 +113,34 @@ class App extends Component {
 
   handleAnima() {
     console.log('执行了')
+    this.setState((state) => {
+      console.log(this.state === state)
+      let test = this.state.test
+      return {
+        test: test += 'test'
+      }
+    })
+    // this.setState((state) => ({
+    //   test: '33333'
+    // }))
+
+    // this.setState({
+    //   test: '22222'
+    // })
+    // this.setState({
+    //   test: '333333'
+    // })
+
     // this.setState(() => ({
     //   animate: !this.state.animate
     // }))
   }
 
   render() {
-    console.log("father render")
+    console.log(this.state.test, '-----测试')
     return (
       <Fragment>
+        <div>{this.state.test}</div>
         <input type="text" 
           value={this.state.inputValue} 
           onChange={this.inputChange.bind(this, '1')}
@@ -128,13 +149,11 @@ class App extends Component {
           }}
         /> 
           <button onClick={this.submit.bind(this)}>提交</button>
-        <ul>
-          {
-            this.itemArr()
-          }
-        </ul>
         <button onClick={this.handleAnima}>点击动画</button>
         <div className={'amia'}>11111</div>
+        <Test>
+          <div>我是测试</div>
+        </Test>
       </Fragment>
     )
   }
